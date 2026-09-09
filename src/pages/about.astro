@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <Layout title="About">
@@ -30,7 +32,7 @@ import Layout from '../layouts/Layout.astro';
 			<p>
 				Play the games we've always played, on our own schedule, with people
 				we already trust. We are not actively recruiting, scouting, or
-				accepting tryouts — see the <a href="/join">recruitment page</a> for
+				accepting tryouts — see the <a href={`${base}join`}>recruitment page</a> for
 				the long version of that short answer.
 			</p>
 
