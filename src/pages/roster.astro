@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { roster } from '../data/roster';
+---
+
+<Layout title="Roster">
+	<section class="section">
+		<div class="wrap">
+			<p class="eyebrow">// current roster</p>
+			<h1>The Lineup</h1>
+			<p class="lede">
+				Five players, several decades of combined server browsing experience,
+				zero interest in adding a sixth.
+			</p>
+
+			<div class="grid">
+				{
+					roster.map((p) => (
+						<div class="card player-card">
+							<div class="player-head">
+								<p class="mono handle">{p.handle}</p>
+								<span class="badge">{p.game}</span>
+							</div>
+							<p class="role">{p.role}</p>
+							<p class="years mono">{p.years}</p>
+							<p class="bio">{p.bio}</p>
+							<p class="quote">&ldquo;{p.quote}&rdquo;</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.lede {
+		max-width: 60ch;
+		color: var(--muted);
+		margin-bottom: 2.5rem;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.player-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+		margin-bottom: 0.4rem;
+	}
+
+	.handle {
+		color: var(--accent);
+		font-size: 1.15rem;
+		margin: 0;
+	}
+
+	.role {
+		margin: 0 0 0.2rem;
+		font-weight: 600;
+	}
+
+	.years {
+		color: var(--muted);
+		font-size: 0.8rem;
+		margin: 0 0 1rem;
+	}
+
+	.bio {
+		color: var(--muted);
+		margin: 0 0 1rem;
+	}
+
+	.quote {
+		font-style: italic;
+		font-size: 0.9rem;
+		margin: 0;
+		border-left: 2px solid var(--accent-dim);
+		padding-left: 0.75rem;
+	}
+</style>

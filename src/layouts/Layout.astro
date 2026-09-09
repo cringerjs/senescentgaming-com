@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+import OwlMark from '../components/OwlMark.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const {
+	title,
+	description = 'Senescent Gaming — competitive gaming for players who remember what a ping of 40ms felt like.',
+} = Astro.props;
+
+const nav = [
+	{ href: '/', label: 'Home' },
+	{ href: '/roster', label: 'Roster' },
+	{ href: '/about', label: 'About' },
+	{ href: '/results', label: 'Hall of Fame' },
+	{ href: '/join', label: 'Join' },
+];
+
+const path = Astro.url.pathname;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="mask-icon" href="/favicon.svg" color="#39ff14" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{title} · Senescent Gaming</title>
+	</head>
+	<body>
+		<nav class="site-nav">
+			<div class="wrap">
+				<a class="brand" href="/">
+					<OwlMark size={30} class="brand-owl" />
+					SENESCENT<span>_</span>GAMING
+				</a>
+				<ul class="nav-links">
+					{
+						nav.map((item) => (
+							<li>
+								<a
+									href={item.href}
+									aria-current={path === item.href ? 'page' : undefined}
+								>
+									{item.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</nav>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<div class="wrap">
+				<span>&copy; {new Date().getFullYear()} Senescent Gaming. Est. sometime before you had broadband.</span>
+				<span class="mono">ROSTER STATUS: CLOSED</span>
+			</div>
+		</footer>
+	</body>
+</html>

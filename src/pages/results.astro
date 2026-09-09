@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const results = [
+	{
+		event: 'Old Guard Invitational',
+		placement: '1st',
+		note: 'Won on stall tactics alone. Nobody had the stamina to out-rotate us.',
+	},
+	{
+		event: 'Regional LAN Cup',
+		placement: '2nd',
+		note: 'Lost the final. Blamed the chair, not the aim. The chair was innocent.',
+	},
+	{
+		event: 'Late Night Ladder Series',
+		placement: '1st',
+		note: 'Only team still online by round four. Attrition is a strategy.',
+	},
+	{
+		event: 'Community Clan Wars',
+		placement: '3rd',
+		note: 'Someone\'s dog barked during the deciding round. We stand by our alibi.',
+	},
+];
+---
+
+<Layout title="Hall of Fame">
+	<section class="section">
+		<div class="wrap">
+			<p class="eyebrow">// history</p>
+			<h1>Hall of Fame</h1>
+			<p class="lede">
+				A selection of results. Trophies not pictured because most of them are
+				novelty mugs.
+			</p>
+
+			<div class="table">
+				{
+					results.map((r) => (
+						<div class="row">
+							<span class="placement mono">{r.placement}</span>
+							<div class="details">
+								<p class="event">{r.event}</p>
+								<p class="note">{r.note}</p>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.lede {
+		color: var(--muted);
+		max-width: 55ch;
+		margin-bottom: 2.5rem;
+	}
+
+	.table {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.row {
+		display: flex;
+		gap: 1.5rem;
+		align-items: flex-start;
+		border: 1px solid var(--line);
+		background: var(--bg-card);
+		border-radius: 4px;
+		padding: 1.25rem 1.5rem;
+	}
+
+	.placement {
+		color: var(--accent);
+		font-size: 1.1rem;
+		min-width: 2.5ch;
+	}
+
+	.event {
+		margin: 0 0 0.3rem;
+		font-weight: 600;
+	}
+
+	.note {
+		margin: 0;
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+</style>

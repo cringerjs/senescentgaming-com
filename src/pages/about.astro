@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About">
+	<section class="section">
+		<div class="wrap narrow">
+			<p class="eyebrow">// history</p>
+			<h1>About Senescent Gaming</h1>
+
+			<p>
+				Senescent Gaming traces back to LAN nights running over IPX/SPX,
+				matchmaking through Kali, and browsing servers on GameSpy 3D — an era
+				when finding a game took longer than playing one. What started as a
+				loose group of regulars who kept showing up to the same servers turned
+				into something closer to a team, mostly because nobody else wanted to
+				put up with our callouts.
+			</p>
+
+			<p>
+				The name is the joke and the point. <em>Senescent</em> means aging —
+				and while the current esports scene loves crowning teenagers as
+				"veterans" after two seasons, we've been doing this since before most
+				pro rosters' players were born. We don't have faster reflexes than we
+				used to. We have better positioning, worse knees, and absolutely no
+				patience for being spammed with "hey want to join our clan" messages.
+			</p>
+
+			<h2>What we actually do</h2>
+			<p>
+				Play the games we've always played, on our own schedule, with people
+				we already trust. We are not actively recruiting, scouting, or
+				accepting tryouts — see the <a href="/join">recruitment page</a> for
+				the long version of that short answer.
+			</p>
+
+			<h2>The name, if you're still wondering</h2>
+			<p>
+				<strong>Senescent</strong> (adj.): growing old. That's it. That's the
+				bit.
+			</p>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.narrow {
+		max-width: 70ch;
+	}
+
+	.narrow p {
+		color: var(--muted);
+		margin-bottom: 1.25rem;
+	}
+
+	.narrow h2 {
+		color: var(--fg);
+		margin-top: 2.5rem;
+		font-size: 1.25rem;
+	}
+
+	.narrow em,
+	.narrow strong {
+		color: var(--fg);
+	}
+</style>
