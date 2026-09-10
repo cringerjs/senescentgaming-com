@@ -12,8 +12,8 @@ export const roster: Player[] = [
 		handle: 'Tristeaal',
 		role: 'Fragger / Duelist',
 		game: 'FPS',
-		years: 'Active since the IPX/SPX days',
-		bio: 'Cut his teeth on dial-up LAN nights and never really stopped. Aim has not degraded nearly as much as everything else.',
+		years: 'Active since the IPX/SPX days · CAL-CS alum',
+		bio: 'Cut his teeth on dial-up LAN nights and a brief, humbling stint in CAL-CS — the Cyberathlete Amateur League — where the team\'s record built a lot of character and very few wins. Aim has not degraded nearly as much as everything else.',
 		quote: 'Ping was 40ms on a good day and I still 1v3\'d the block.',
 	},
 	{
