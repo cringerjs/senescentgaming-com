@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { terminalQuotes } from '../data/quotes';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const creed = terminalQuotes.slice(0, 4);
 ---
 
 <Layout title="About">
@@ -41,6 +43,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 				<strong>Senescent</strong> (adj.): growing old. That's it. That's the
 				bit.
 			</p>
+
+			<h2>Words we sort of live by</h2>
+			<ul class="creed">
+				{creed.map((line) => <li class="mono">{line}</li>)}
+			</ul>
 		</div>
 	</section>
 </Layout>
@@ -64,5 +71,24 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 	.narrow em,
 	.narrow strong {
 		color: var(--fg);
+	}
+
+	.creed {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.creed li {
+		color: var(--accent);
+		font-size: 0.85rem;
+		padding: 0.75rem 1rem;
+		border: 1px solid var(--line);
+		border-left: 2px solid var(--accent-dim);
+		background: var(--bg-card);
+		border-radius: 2px;
 	}
 </style>

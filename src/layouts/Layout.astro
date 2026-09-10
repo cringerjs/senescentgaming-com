@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import OwlMark from '../components/OwlMark.astro';
+import { terminalQuotes } from '../data/quotes';
 
 interface Props {
 	title: string;
@@ -64,10 +65,20 @@ const path = Astro.url.pathname;
 		</main>
 
 		<footer class="site-footer">
-			<div class="wrap">
+			<div class="wrap footer-meta">
 				<span>&copy; {new Date().getFullYear()} Senescent Gaming. Est. sometime before you had broadband.</span>
 				<span class="mono">ROSTER STATUS: CLOSED</span>
 			</div>
+			<div class="wrap">
+				<p class="mono footer-quote" id="terminal-quote">&gt; {terminalQuotes[0]}</p>
+			</div>
 		</footer>
+		<script define:vars={{ quotes: terminalQuotes }}>
+			const el = document.getElementById('terminal-quote');
+			if (el && quotes.length) {
+				const pick = quotes[Math.floor(Math.random() * quotes.length)];
+				el.textContent = `> ${pick}`;
+			}
+		</script>
 	</body>
 </html>

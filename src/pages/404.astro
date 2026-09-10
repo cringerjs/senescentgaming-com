@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import OwlMark from '../components/OwlMark.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<Layout title="Connection Lost">
+	<section class="section error-section">
+		<div class="wrap narrow">
+			<OwlMark size={130} class="error-owl" />
+			<p class="eyebrow">// connection terminated</p>
+			<h1>404</h1>
+			<p class="mono error-line">
+				STRANGE GAME. THE ONLY WINNING MOVE IS TO CHECK THE URL.
+			</p>
+			<p>
+				This page doesn't exist, never existed, or logged off sometime around
+				2004 and never came back — much like most of our old clanmates.
+			</p>
+			<a class="btn" href={base}>Retreat to base →</a>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.error-section {
+		padding-top: 5rem;
+		text-align: center;
+	}
+
+	.narrow {
+		max-width: 60ch;
+	}
+
+	.error-owl {
+		color: var(--accent-dim);
+		opacity: 0.7;
+		margin-bottom: 1.5rem;
+	}
+
+	.error-section h1 {
+		font-family: var(--font-mono);
+		font-size: clamp(3rem, 12vw, 5rem);
+		margin: 0 0 1rem;
+		color: var(--fg);
+		text-shadow: 0 0 18px rgba(57, 255, 20, 0.25);
+	}
+
+	.error-line {
+		color: var(--accent);
+		margin-bottom: 1.5rem;
+	}
+
+	.error-section p:not(.error-line) {
+		color: var(--muted);
+		max-width: 50ch;
+		margin: 0 auto 2rem;
+	}
+</style>

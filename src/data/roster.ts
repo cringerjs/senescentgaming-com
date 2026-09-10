@@ -45,7 +45,7 @@ export const roster: Player[] = [
 		role: 'Entry Fragger',
 		game: 'Arena Shooters',
 		years: 'Two pairs of glasses deep',
-		bio: 'First through the door, first to need reading glasses to check the scoreboard afterward.',
+		bio: 'First through the door, first to need reading glasses to check the scoreboard afterward. Still pretty pro, if you squint.',
 		quote: 'I don\'t need to see you clearly to hear you fall.',
 	},
 ];

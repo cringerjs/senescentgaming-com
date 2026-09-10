@@ -128,11 +128,18 @@ img {
 	font-size: 0.8rem;
 }
 
-.site-footer .wrap {
+.site-footer .footer-meta {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
 	gap: 0.5rem;
+}
+
+.footer-quote {
+	margin: 0.75rem 0 0;
+	color: var(--accent-dim);
+	opacity: 0.85;
+	letter-spacing: 0.02em;
 }
 
 /* Shared bits */
