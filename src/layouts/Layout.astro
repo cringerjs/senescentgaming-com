@@ -23,7 +23,8 @@ const nav = [
 	{ href: `${base}join`, label: 'Join' },
 ];
 
-const path = Astro.url.pathname;
+const normalize = (p: string) => p.replace(/\/+$/, '') || '/';
+const path = normalize(Astro.url.pathname);
 ---
 
 <html lang="en">
@@ -49,7 +50,9 @@ const path = Astro.url.pathname;
 							<li>
 								<a
 									href={item.href}
-									aria-current={path === item.href ? 'page' : undefined}
+									aria-current={
+										path === normalize(item.href) ? 'page' : undefined
+									}
 								>
 									{item.label}
 								</a>
