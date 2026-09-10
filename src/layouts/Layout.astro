@@ -44,6 +44,12 @@ const path = normalize(Astro.url.pathname);
 					<OwlMark size={30} class="brand-owl" />
 					SENESCENT<span>_</span>GAMING
 				</a>
+				<input type="checkbox" id="nav-toggle" class="nav-toggle-input" />
+				<label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation">
+					<span></span>
+					<span></span>
+					<span></span>
+				</label>
 				<ul class="nav-links">
 					{
 						nav.map((item) => (
