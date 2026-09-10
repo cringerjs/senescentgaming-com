@@ -21,7 +21,7 @@ export const roster: Player[] = [
 		role: 'In-Game Leader / Macro Strategist',
 		game: 'RTS',
 		years: '20+ years optimizing build orders',
-		bio: 'Runs the team like a quarterly review. Calls it uber micro when he does it, calls it micromanaging when anyone else does. Has a strong opinion about everyone else\'s economy too.',
+		bio: 'Runs the team like a quarterly review. Micromanages worker production like it\'s a personal vendetta, but when the fighting actually starts, it\'s legitimately uber micro. Has a strong opinion about everyone else\'s economy too.',
 		quote: 'I have a spreadsheet for your spreadsheet.',
 	},
 	{
