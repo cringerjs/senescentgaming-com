@@ -156,8 +156,9 @@ const path = normalize(Astro.url.pathname);
 			try {
 				const key = 'senescent-visitor-count';
 				const base = 1337;
-				const count = base + parseInt(localStorage.getItem(key) || '0', 10) + 1;
-				localStorage.setItem(key, String(count - base));
+				const visits = parseInt(localStorage.getItem(key) || '0', 10);
+				localStorage.setItem(key, String(visits + 1));
+				const count = base + visits;
 				const digitsEl = document.querySelector('.counter-digits');
 				if (digitsEl) {
 					digitsEl.textContent = String(count).padStart(7, '0');
