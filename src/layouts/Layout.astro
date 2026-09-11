@@ -38,6 +38,7 @@ const path = normalize(Astro.url.pathname);
 		<title>{title} · Senescent Gaming</title>
 	</head>
 	<body>
+		<div class="crt-overlay" aria-hidden="true"></div>
 		<nav class="site-nav">
 			<div class="wrap">
 				<a class="brand" href={base}>
@@ -81,6 +82,11 @@ const path = normalize(Astro.url.pathname);
 			<div class="wrap">
 				<p class="mono footer-quote" id="terminal-quote">&gt; {terminalQuotes[0]}</p>
 			</div>
+			<div class="wrap">
+				<p class="mono visitor-counter" id="visitor-counter" aria-label="Visitor counter (not really tracking you)">
+					VISITORS: <span class="counter-digits">0001337</span>
+				</p>
+			</div>
 		</footer>
 		<script define:vars={{ quotes: terminalQuotes }}>
 			const el = document.getElementById('terminal-quote');
@@ -88,6 +94,32 @@ const path = normalize(Astro.url.pathname);
 				const pick = quotes[Math.floor(Math.random() * quotes.length)];
 				el.textContent = `> ${pick}`;
 			}
+
+			try {
+				const key = 'senescent-visitor-count';
+				const base = 1337;
+				const count = base + parseInt(localStorage.getItem(key) || '0', 10) + 1;
+				localStorage.setItem(key, String(count - base));
+				const digitsEl = document.querySelector('.counter-digits');
+				if (digitsEl) {
+					digitsEl.textContent = String(count).padStart(7, '0');
+				}
+			} catch (e) {
+				// localStorage unavailable — the counter just stays at its default. Fine.
+			}
+
+			console.log(
+				'%c SENESCENT GAMING ',
+				'background:#0a0d0a;color:#39ff14;font-family:monospace;font-size:16px;padding:6px 10px;border:1px solid #39ff14;'
+			);
+			console.log(
+				'%cHack the planet. Or at least the thermostat.',
+				'color:#39ff14;font-family:monospace;font-size:12px;'
+			);
+			console.log(
+				'%cYou found the console. We\'re still not recruiting.',
+				'color:#7c9a86;font-family:monospace;font-size:12px;'
+			);
 		</script>
 	</body>
 </html>
