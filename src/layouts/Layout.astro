@@ -87,6 +87,17 @@ const path = normalize(Astro.url.pathname);
 					VISITORS: <span class="counter-digits">0001337</span>
 				</p>
 			</div>
+			<div class="wrap footer-extras">
+				<nav class="webring" aria-label="Webring">
+					<a href={base} title="There is only one site in this webring.">&larr; PREV</a>
+					<span class="webring-label">SENESCENT GAMING WEBRING</span>
+					<a href={base} title="There is only one site in this webring.">NEXT &rarr;</a>
+				</nav>
+				<div class="footer-badges">
+					<span class="footer-badge">BEST VIEWED IN NETSCAPE NAVIGATOR AT 800&times;600</span>
+					<span class="footer-badge">POWERED BY NOTEPAD AND SPITE</span>
+				</div>
+			</div>
 		</footer>
 		<script define:vars={{ quotes: terminalQuotes }}>
 			const el = document.getElementById('terminal-quote');

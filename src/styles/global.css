@@ -351,6 +351,61 @@ img {
 	letter-spacing: 0.12em;
 }
 
+/* Webring + footer badges */
+.footer-extras {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.75rem;
+	margin-top: 1rem;
+	padding-top: 1rem;
+	border-top: 1px dashed var(--line);
+}
+
+.webring {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	font-family: var(--font-mono);
+	font-size: 0.7rem;
+	border: 1px solid var(--line);
+	background: var(--bg-card);
+	padding: 0.4rem 0.9rem;
+	border-radius: 2px;
+}
+
+.webring a {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+.webring a:hover {
+	text-decoration: underline;
+}
+
+.webring-label {
+	color: var(--muted);
+	letter-spacing: 0.04em;
+}
+
+.footer-badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	justify-content: center;
+}
+
+.footer-badge {
+	font-family: var(--font-mono);
+	font-size: 0.65rem;
+	color: var(--accent-dim);
+	border: 1px solid var(--line);
+	padding: 0.3rem 0.6rem;
+	border-radius: 2px;
+	background: var(--bg-card);
+	letter-spacing: 0.03em;
+}
+
 /* System requirements block */
 .sysreq {
 	border: 1px solid var(--line);
