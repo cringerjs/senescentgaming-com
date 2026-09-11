@@ -387,7 +387,19 @@ img {
 	gap: 0.75rem;
 	margin-top: 1rem;
 	padding-top: 1rem;
+	padding-bottom: 3.5rem;
 	border-top: 1px dashed var(--line);
+}
+
+@media (max-width: 480px) {
+	.mode-1998-toggle {
+		font-size: 0.65rem;
+		padding: 0.45rem 0.7rem;
+	}
+
+	.footer-extras {
+		padding-bottom: 4.5rem;
+	}
 }
 
 .webring {
