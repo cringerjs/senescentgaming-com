@@ -12,6 +12,34 @@
 	--font-mono: 'Consolas', 'SFMono-Regular', Menlo, monospace;
 }
 
+::selection {
+	background: var(--accent);
+	color: #04140a;
+}
+
+html {
+	scrollbar-color: var(--accent-dim) var(--bg);
+	scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--accent-dim);
+	border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--accent);
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -404,6 +432,52 @@ img {
 	border-radius: 2px;
 	background: var(--bg-card);
 	letter-spacing: 0.03em;
+}
+
+.footer-badge-link {
+	color: var(--accent);
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.footer-badge-link:hover {
+	text-decoration: underline;
+}
+
+.dialup {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-top: 0.75rem;
+}
+
+.dialup-btn {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.04em;
+	padding: 0.4rem 0.9rem;
+	background: var(--bg-card);
+	color: var(--accent);
+	border: 1px solid var(--accent-dim);
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.dialup-btn:hover:not(:disabled) {
+	background: var(--accent-dim);
+	color: #04140a;
+}
+
+.dialup-btn:disabled {
+	opacity: 0.6;
+	cursor: wait;
+}
+
+.dialup-status {
+	font-size: 0.7rem;
+	color: var(--muted);
+	letter-spacing: 0.04em;
+	min-height: 1em;
 }
 
 /* System requirements block */
