@@ -34,6 +34,9 @@ const path = normalize(Astro.url.pathname);
 				if (localStorage.getItem('senescent-1998-mode') === '1') {
 					document.documentElement.classList.add('mode-1998');
 				}
+				if (sessionStorage.getItem('senescent-boot-shown') === '1') {
+					document.documentElement.classList.add('boot-skip');
+				}
 			} catch (e) {}
 		</script>
 		<meta charset="utf-8" />
@@ -45,6 +48,20 @@ const path = normalize(Astro.url.pathname);
 		<title>{title} · Senescent Gaming</title>
 	</head>
 	<body>
+		<div id="boot-sequence" class="boot-sequence" role="status" aria-live="polite">
+			<div class="boot-lines">
+				<p>SENESCENT BIOS v3.11 &mdash; (C) 1998-2026 Senescent Gaming</p>
+				<p>Initializing IPX/SPX driver... OK</p>
+				<p>Detecting sound card... Sound Blaster 16 found</p>
+				<p>Testing joint mobility... marginal, proceeding anyway</p>
+				<p>Memory test... 640K OK (should be enough for anybody)</p>
+				<p>Establishing connection to Kali server... OK</p>
+				<p>Loading SENESCENTGAMING.COM...</p>
+				<p>Checking roster status... CLOSED</p>
+				<p class="boot-welcome">WELCOME TO SENESCENT GAMING</p>
+			</div>
+			<p class="boot-skip-hint">click or press any key to skip</p>
+		</div>
 		<div class="crt-overlay" aria-hidden="true"></div>
 		<div class="marquee-1998" aria-hidden="true">
 			<div class="marquee-track">
@@ -156,6 +173,30 @@ const path = normalize(Astro.url.pathname);
 				'%cYou found the console. We\'re still not recruiting.',
 				'color:#7c9a86;font-family:monospace;font-size:12px;'
 			);
+
+			const bootOverlay = document.getElementById('boot-sequence');
+			if (bootOverlay) {
+				let alreadyShown = false;
+				try {
+					alreadyShown = sessionStorage.getItem('senescent-boot-shown') === '1';
+				} catch (e) {}
+				if (alreadyShown) {
+					bootOverlay.remove();
+				} else {
+					const dismissBoot = () => {
+						bootOverlay.classList.add('boot-hidden');
+						setTimeout(() => bootOverlay.remove(), 450);
+						try {
+							sessionStorage.setItem('senescent-boot-shown', '1');
+						} catch (e) {}
+						document.removeEventListener('keydown', dismissBoot);
+						bootOverlay.removeEventListener('click', dismissBoot);
+					};
+					bootOverlay.addEventListener('click', dismissBoot);
+					document.addEventListener('keydown', dismissBoot);
+					setTimeout(dismissBoot, 4200);
+				}
+			}
 
 			const html = document.documentElement;
 			const toggleBtn = document.getElementById('mode-1998-toggle');
