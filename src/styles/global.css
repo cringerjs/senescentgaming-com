@@ -630,10 +630,19 @@ html.mode-1998 .creed li,
 html.mode-1998 .sysreq,
 html.mode-1998 .footer-badge,
 html.mode-1998 .webring,
-html.mode-1998 .counter-digits {
+html.mode-1998 .counter-digits,
+html.mode-1998 .dialup-btn {
 	background: #c0c0c0 !important;
 	color: #000 !important;
 	border: 3px outset #fff !important;
+}
+
+html.mode-1998 .dialup-btn:hover:not(:disabled) {
+	background: #d8d8d8 !important;
+}
+
+html.mode-1998 .dialup-btn:disabled {
+	border-style: inset !important;
 }
 
 html.mode-1998 body,
