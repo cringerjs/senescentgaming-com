@@ -1,43 +1,42 @@
-# Astro Starter Kit: Minimal
+# Senescent Gaming
+
+The site for Senescent Gaming — a "pro" org for aging players who'd rather show a website than explain, again, why they're not joining your clan.
+
+Live at [senescentgaming.com](https://senescentgaming.com).
+
+## Stack
+
+- [Astro](https://astro.build) — static site, no client-side framework
+- Deployed to [Cloudflare Pages](https://pages.cloudflare.com/) as project `senescentgaming-com`
+- DNS on Cloudflare (apex + `www` both CNAME to the Pages project, proxied)
+
+## Development
 
 ```sh
-pnpm create astro@latest -- --template minimal
+pnpm install
+pnpm dev       # localhost:4321
+pnpm build     # outputs to ./dist
+pnpm preview   # preview the production build locally
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Deployment
 
-## 🚀 Project Structure
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site and deploys it to Cloudflare Pages via `wrangler pages deploy`.
 
-Inside of your Astro project, you'll see the following folders and files:
+To deploy manually from a local checkout:
+
+```sh
+pnpm build
+pnpm dlx wrangler pages deploy dist --project-name=senescentgaming-com
+```
+
+## Structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── components/   # OwlMark.astro — the skeletal owl logo
+├── data/         # roster.ts, quotes.ts — site content as data
+├── layouts/      # Layout.astro — shared nav/footer shell
+├── pages/        # one file per route
+└── styles/       # global.css
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
