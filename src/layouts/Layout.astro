@@ -29,6 +29,13 @@ const path = normalize(Astro.url.pathname);
 
 <html lang="en">
 	<head>
+		<script is:inline>
+			try {
+				if (localStorage.getItem('senescent-1998-mode') === '1') {
+					document.documentElement.classList.add('mode-1998');
+				}
+			} catch (e) {}
+		</script>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
 		<link rel="mask-icon" href={`${base}favicon.svg`} color="#39ff14" />
@@ -39,6 +46,24 @@ const path = normalize(Astro.url.pathname);
 	</head>
 	<body>
 		<div class="crt-overlay" aria-hidden="true"></div>
+		<div class="marquee-1998" aria-hidden="true">
+			<div class="marquee-track">
+				*** WELCOME TO SENESCENT GAMING *** THIS SITE IS BEST VIEWED IN NETSCAPE
+				NAVIGATOR *** SIGN OUR GUESTBOOK *** UNDER CONSTRUCTION *** HACK THE
+				PLANET *** YOU ARE VISITOR NUMBER 001338 *** ROSTER STATUS: CLOSED ***
+			</div>
+		</div>
+		<div class="construction-1998" aria-hidden="true">
+			🚧 UNDER CONSTRUCTION — PARDON OUR DUST 🚧
+		</div>
+		<button
+			id="mode-1998-toggle"
+			class="mode-1998-toggle"
+			type="button"
+			aria-label="Toggle 1998 mode"
+		>
+			🕰 1998 MODE
+		</button>
 		<nav class="site-nav">
 			<div class="wrap">
 				<a class="brand" href={base}>
@@ -131,6 +156,25 @@ const path = normalize(Astro.url.pathname);
 				'%cYou found the console. We\'re still not recruiting.',
 				'color:#7c9a86;font-family:monospace;font-size:12px;'
 			);
+
+			const html = document.documentElement;
+			const toggleBtn = document.getElementById('mode-1998-toggle');
+			const applyMode1998 = (on) => {
+				html.classList.toggle('mode-1998', on);
+				if (toggleBtn) {
+					toggleBtn.textContent = on ? '↩ BACK TO NORMAL' : '🕰 1998 MODE';
+				}
+			};
+			applyMode1998(html.classList.contains('mode-1998'));
+			if (toggleBtn) {
+				toggleBtn.addEventListener('click', () => {
+					const next = !html.classList.contains('mode-1998');
+					applyMode1998(next);
+					try {
+						localStorage.setItem('senescent-1998-mode', next ? '1' : '0');
+					} catch (e) {}
+				});
+			}
 		</script>
 	</body>
 </html>

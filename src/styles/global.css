@@ -442,3 +442,171 @@ img {
 	margin: 0;
 	color: var(--fg);
 }
+
+/* ===== 1998 Mode ===== */
+
+.mode-1998-toggle {
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	z-index: 100;
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.04em;
+	padding: 0.6rem 1rem;
+	background: var(--bg-card);
+	color: var(--accent);
+	border: 1px solid var(--accent-dim);
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.mode-1998-toggle:hover {
+	background: var(--accent-dim);
+	color: #04140a;
+}
+
+.marquee-1998,
+.construction-1998 {
+	display: none;
+}
+
+.marquee-track {
+	display: inline-block;
+	white-space: nowrap;
+	padding-left: 100%;
+	animation: marquee-scroll 18s linear infinite;
+}
+
+@keyframes marquee-scroll {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes blink-1998 {
+	50% {
+		opacity: 0;
+	}
+}
+
+html.mode-1998 .crt-overlay {
+	display: none;
+}
+
+html.mode-1998 .marquee-1998 {
+	display: block;
+	overflow: hidden;
+	background: #000080;
+	color: #ffff00;
+	font-family: 'Courier New', monospace;
+	font-weight: bold;
+	font-size: 0.85rem;
+	padding: 0.4rem 0;
+	border-bottom: 2px solid #ffff00;
+}
+
+html.mode-1998 .construction-1998 {
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	font-size: 0.85rem;
+	color: #000;
+	padding: 0.5rem;
+	background: repeating-linear-gradient(
+		45deg,
+		#ffcc00,
+		#ffcc00 12px,
+		#111 12px,
+		#111 24px
+	);
+	border-top: 3px solid #000;
+	border-bottom: 3px solid #000;
+}
+
+html.mode-1998 body {
+	background: repeating-linear-gradient(
+		45deg,
+		#000080,
+		#000080 12px,
+		#0000a8 12px,
+		#0000a8 24px
+	) !important;
+}
+
+html.mode-1998 * {
+	font-family: 'Times New Roman', Times, serif !important;
+	text-shadow: none !important;
+	box-shadow: none !important;
+	animation-name: none !important;
+	border-radius: 0 !important;
+	letter-spacing: normal !important;
+}
+
+html.mode-1998 .site-nav,
+html.mode-1998 .card,
+html.mode-1998 .badge,
+html.mode-1998 .btn,
+html.mode-1998 .player-card,
+html.mode-1998 .row,
+html.mode-1998 .creed li,
+html.mode-1998 .sysreq,
+html.mode-1998 .footer-badge,
+html.mode-1998 .webring,
+html.mode-1998 .counter-digits {
+	background: #c0c0c0 !important;
+	color: #000 !important;
+	border: 3px outset #fff !important;
+}
+
+html.mode-1998 body,
+html.mode-1998 p,
+html.mode-1998 span,
+html.mode-1998 li {
+	color: #00ff00;
+}
+
+html.mode-1998 .wrap,
+html.mode-1998 main {
+	background: transparent !important;
+}
+
+html.mode-1998 h1,
+html.mode-1998 h2 {
+	font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+	color: #ff00ff !important;
+	text-shadow: 2px 2px 0 #00ffff !important;
+}
+
+html.mode-1998 h1 {
+	animation: blink-1998 1s step-start infinite !important;
+}
+
+html.mode-1998 a {
+	color: #0000ff !important;
+	text-decoration: underline !important;
+}
+
+html.mode-1998 a:visited {
+	color: #800080 !important;
+}
+
+html.mode-1998 .brand,
+html.mode-1998 .eyebrow,
+html.mode-1998 .footer-quote {
+	color: #ffff00 !important;
+}
+
+html.mode-1998 svg {
+	color: #ff00ff !important;
+}
+
+html.mode-1998 .mode-1998-toggle {
+	background: #c0c0c0 !important;
+	color: #000 !important;
+	border: 3px outset #fff !important;
+	font-family: 'Courier New', monospace !important;
+}
