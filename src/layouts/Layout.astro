@@ -229,37 +229,123 @@ const path = normalize(Astro.url.pathname);
 					const AudioCtx = window.AudioContext || window.webkitAudioContext;
 					if (!AudioCtx) return;
 					dialupBtn.disabled = true;
-					if (dialupStatus) dialupStatus.textContent = 'DIALING...';
 
 					const ctx = new AudioCtx();
 					const now = ctx.currentTime;
-					const freqs = [
-						350, 440, 620, 1200, 2100, 1800, 2400, 1600, 2600, 900, 1400, 2000,
-					];
-					let t = now;
-					freqs.forEach((f, i) => {
+
+					const tone = (freq, start, dur, type, vol) => {
 						const osc = ctx.createOscillator();
 						const gain = ctx.createGain();
-						osc.type = i % 2 === 0 ? 'square' : 'sawtooth';
-						osc.frequency.setValueAtTime(f, t);
-						gain.gain.setValueAtTime(0.06, t);
-						gain.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
+						osc.type = type || 'sine';
+						osc.frequency.setValueAtTime(freq, start);
+						gain.gain.setValueAtTime(0, start);
+						gain.gain.linearRampToValueAtTime(vol || 0.05, start + 0.008);
+						gain.gain.setValueAtTime(vol || 0.05, Math.max(start + 0.008, start + dur - 0.015));
+						gain.gain.linearRampToValueAtTime(0, start + dur);
 						osc.connect(gain).connect(ctx.destination);
-						osc.start(t);
-						osc.stop(t + 0.18);
-						t += 0.14 + Math.random() * 0.06;
-					});
-					const osc2 = ctx.createOscillator();
-					const gain2 = ctx.createGain();
-					osc2.type = 'sine';
-					osc2.frequency.setValueAtTime(1000, t);
-					gain2.gain.setValueAtTime(0.08, t);
-					gain2.gain.exponentialRampToValueAtTime(0.001, t + 0.4);
-					osc2.connect(gain2).connect(ctx.destination);
-					osc2.start(t);
-					osc2.stop(t + 0.4);
+						osc.start(start);
+						osc.stop(start + dur + 0.02);
+					};
 
-					const totalMs = (t - now + 0.4) * 1000;
+					const sweep = (f1, f2, start, dur, type, vol) => {
+						const osc = ctx.createOscillator();
+						const gain = ctx.createGain();
+						osc.type = type || 'sine';
+						osc.frequency.setValueAtTime(f1, start);
+						osc.frequency.exponentialRampToValueAtTime(Math.max(f2, 40), start + dur);
+						gain.gain.setValueAtTime(vol || 0.035, start);
+						gain.gain.setValueAtTime(vol || 0.035, start + Math.max(dur - 0.02, 0));
+						gain.gain.linearRampToValueAtTime(0, start + dur);
+						osc.connect(gain).connect(ctx.destination);
+						osc.start(start);
+						osc.stop(start + dur + 0.02);
+					};
+
+					const noiseBurst = (start, dur, freq, q, vol) => {
+						const bufferSize = Math.max(1, Math.floor(ctx.sampleRate * dur));
+						const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+						const data = buffer.getChannelData(0);
+						for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+						const noise = ctx.createBufferSource();
+						noise.buffer = buffer;
+						const filter = ctx.createBiquadFilter();
+						filter.type = 'bandpass';
+						filter.frequency.value = freq;
+						filter.Q.value = q;
+						const gain = ctx.createGain();
+						gain.gain.setValueAtTime(vol, start);
+						gain.gain.linearRampToValueAtTime(0, start + dur);
+						noise.connect(filter).connect(gain).connect(ctx.destination);
+						noise.start(start);
+					};
+
+					let t = now;
+
+					// 1. Dial tone (North American 350+440Hz)
+					tone(350, t, 0.5, 'sine', 0.035);
+					tone(440, t, 0.5, 'sine', 0.035);
+					if (dialupStatus) dialupStatus.textContent = 'DIAL TONE...';
+					t += 0.6;
+
+					// 2. DTMF dialing
+					const dtmf = {
+						5: [770, 1336],
+						0: [941, 1336],
+						1: [697, 1209],
+						9: [852, 1477],
+					};
+					const digits = [5, 5, 5, 0, 1, 9, 9];
+					setTimeout(() => {
+						if (dialupStatus) dialupStatus.textContent = 'DIALING...';
+					}, (t - now) * 1000);
+					digits.forEach((d) => {
+						const [f1, f2] = dtmf[d];
+						tone(f1, t, 0.09, 'sine', 0.05);
+						tone(f2, t, 0.09, 'sine', 0.05);
+						t += 0.13;
+					});
+					t += 0.5;
+
+					// 3. ANSam carrier tone
+					setTimeout(() => {
+						if (dialupStatus) dialupStatus.textContent = 'NEGOTIATING...';
+					}, (t - now) * 1000);
+					tone(2100, t, 0.6, 'sine', 0.045);
+					t += 0.7;
+
+					// 4. Handshake screech: overlapping chirps + filtered noise
+					const screechStart = t;
+					const screechDur = 2.2;
+					for (let i = 0; i < 12; i++) {
+						const st = screechStart + Math.random() * screechDur * 0.85;
+						const f1 = 600 + Math.random() * 2600;
+						const f2 = 600 + Math.random() * 2600;
+						sweep(
+							f1,
+							f2,
+							st,
+							0.06 + Math.random() * 0.1,
+							Math.random() > 0.5 ? 'square' : 'sawtooth',
+							0.025
+						);
+					}
+					for (let i = 0; i < 7; i++) {
+						const st = screechStart + Math.random() * screechDur * 0.85;
+						noiseBurst(
+							st,
+							0.08 + Math.random() * 0.15,
+							800 + Math.random() * 2400,
+							3 + Math.random() * 4,
+							0.05
+						);
+					}
+					t = screechStart + screechDur;
+
+					// 5. settle
+					tone(1400, t, 0.25, 'sine', 0.025);
+					t += 0.35;
+
+					const totalMs = (t - now) * 1000;
 					const speeds = [
 						'14.4 KBPS',
 						'28.8 KBPS',
